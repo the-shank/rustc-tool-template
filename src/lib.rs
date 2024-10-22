@@ -18,10 +18,31 @@
 #![deny(trivial_numeric_casts)]
 #![deny(unreachable_pub)]
 #![deny(unsafe_op_in_unsafe_fn)]
-#![deny(unused_extern_crates)]
+// #![deny(unused_extern_crates)]
+#![warn(unused_extern_crates)]
 #![deny(unused_import_braces)]
 #![deny(unused_lifetimes)]
 #![deny(unused_qualifications)]
 // #![deny(warnings)]
 #![feature(iter_intersperse)]
 #![feature(rustc_private)]
+
+extern crate rustc_data_structures;
+extern crate rustc_driver;
+extern crate rustc_driver_impl;
+extern crate rustc_errors;
+extern crate rustc_feature;
+extern crate rustc_hash;
+extern crate rustc_hir;
+extern crate rustc_index;
+extern crate rustc_interface;
+extern crate rustc_lint;
+extern crate rustc_middle;
+extern crate rustc_mir_dataflow;
+extern crate rustc_session;
+extern crate rustc_span;
+
+pub mod analysis;
+pub mod compile_util;
+pub mod transform;
+pub mod utils;

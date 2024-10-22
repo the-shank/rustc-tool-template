@@ -372,18 +372,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "719b953e2095829ee67db738b3bfa9fa368c94900df327b3f07fe6e794d2fe1f"
 
 [[package]]
-name = "rustc-tool-template"
-version = "0.1.0"
-dependencies = [
- "clap",
- "color-eyre",
- "serde",
- "serde_json",
- "tracing",
- "tracing-subscriber",
-]
-
-[[package]]
 name = "ryu"
 version = "1.0.18"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -391,18 +379,18 @@ checksum = "f3cb5ba0dc43242ce17de99c180e96db90b235b8a9fdc9543c96d2209116bd9f"
 
 [[package]]
 name = "serde"
-version = "1.0.211"
+version = "1.0.212"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1ac55e59090389fb9f0dd9e0f3c09615afed1d19094284d0b200441f13550793"
+checksum = "ccd4055b7e3937a5c2595e974f5bf1715a23919a595a04b5ad959bdbbb61ab04"
 dependencies = [
  "serde_derive",
 ]
 
 [[package]]
 name = "serde_derive"
-version = "1.0.211"
+version = "1.0.212"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "54be4f245ce16bc58d57ef2716271d0d4519e0f6defa147f6e081005bcb278ff"
+checksum = "726adf8349784fb68a42e6466f49362ae039d9c5333cc6eb131f4d6f94bb9126"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -467,6 +455,18 @@ checksum = "8b9ef9bad013ada3808854ceac7b46812a6465ba368859a37e2100283d2d719c"
 dependencies = [
  "cfg-if",
  "once_cell",
+]
+
+[[package]]
+name = "tool"
+version = "0.1.0"
+dependencies = [
+ "clap",
+ "color-eyre",
+ "serde",
+ "serde_json",
+ "tracing",
+ "tracing-subscriber",
 ]
 
 [[package]]

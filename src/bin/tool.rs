@@ -23,7 +23,63 @@
 #![deny(unused_lifetimes)]
 #![deny(unused_qualifications)]
 // #![deny(warnings)]
+#![feature(rustc_private)]
 
-fn main() {
-    println!("Hello, world!");
+use std::fs::File;
+use std::io::{self, IsTerminal as _};
+use std::path::PathBuf;
+use std::time::Instant;
+
+use analysis::AnalysisConfig;
+use clap::Parser;
+use color_eyre::eyre::{self, Context as _};
+use tool::utils::parse_dir;
+use tool::{analysis, transform};
+use tracing::info;
+use tracing_subscriber::EnvFilter;
+
+#[derive(Parser, Debug)]
+struct Args {
+    /// path to the source dir for the crate to be anlayzed
+    #[arg(long, value_parser=parse_dir)]
+    cratedir: PathBuf,
+
+    #[arg(long)]
+    dump_analysis_result: Option<PathBuf>,
+
+    #[arg(long, default_value_t = false)]
+    transform: bool,
+}
+
+fn main() -> eyre::Result<()> {
+    let start = Instant::now();
+
+    color_eyre::install()?;
+
+    tracing_subscriber::fmt()
+        .with_env_filter(EnvFilter::from_default_env())
+        .with_writer(io::stderr)
+        .with_ansi(io::stdout().is_terminal())
+        .init();
+
+    let args = Args::parse();
+    info!("args: {:#?}", &args);
+
+    eyre::ensure!(args.cratedir.is_dir());
+
+    let conf = AnalysisConfig;
+    let analysis_result = analysis::analyze_path(&args.cratedir, &conf)?;
+
+    if let Some(dump_file) = args.dump_analysis_result {
+        let f = File::create(&dump_file).unwrap();
+        serde_json::to_writer_pretty(f, &analysis_result)
+            .wrap_err_with(|| format!("failed to write the results to {}", dump_file.display()))?;
+    }
+
+    if args.transform {
+        transform::transform_path(&args.cratedir, &analysis_result)?;
+    }
+
+    println!("Total Time : {:.3} seconds", start.elapsed().as_secs_f32());
+    Ok(())
 }
