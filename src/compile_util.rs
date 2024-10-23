@@ -2,7 +2,6 @@ use std::path::{Path, PathBuf};
 use std::process::Command;
 use std::sync::Arc;
 
-use color_eyre::eyre;
 use rustc_errors::registry::Registry;
 use rustc_feature::UnstableFeatures;
 use rustc_hash::FxHashMap;
