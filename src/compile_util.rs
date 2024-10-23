@@ -29,6 +29,10 @@ pub fn make_config(input: Input) -> rustc_interface::Config {
             crate_types: vec![CrateType::Rlib],
             // FIXME: edition should not be fixed...
             edition: Edition::Edition2021,
+            unstable_opts: config::UnstableOptions {
+                mir_opt_level: Some(0),
+                ..config::UnstableOptions::default()
+            },
             ..config::Options::default()
         },
         crate_cfg: Vec::new(),
