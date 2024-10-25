@@ -18,20 +18,14 @@
 #![deny(trivial_numeric_casts)]
 #![deny(unreachable_pub)]
 #![deny(unsafe_op_in_unsafe_fn)]
-#![deny(unused_imports)]
 #![deny(unused_extern_crates)]
 #![deny(unused_import_braces)]
 #![deny(unused_lifetimes)]
 #![deny(unused_qualifications)]
 // #![deny(warnings)]
-#![feature(iter_intersperse)]
 #![feature(rustc_private)]
 
-extern crate rustc_driver;
-extern crate rustc_interface;
-extern crate rustc_middle;
-
-pub mod analysis;
-pub mod plugin;
-pub use plugin::CompilerPlugin;
-pub mod utils;
+fn main() {
+    // env_logger::init();
+    rustc_plugin::cli_main(tool::CompilerPlugin);
+}

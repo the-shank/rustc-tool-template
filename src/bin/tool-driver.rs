@@ -18,20 +18,18 @@
 #![deny(trivial_numeric_casts)]
 #![deny(unreachable_pub)]
 #![deny(unsafe_op_in_unsafe_fn)]
-#![deny(unused_imports)]
 #![deny(unused_extern_crates)]
 #![deny(unused_import_braces)]
 #![deny(unused_lifetimes)]
 #![deny(unused_qualifications)]
 // #![deny(warnings)]
-#![feature(iter_intersperse)]
 #![feature(rustc_private)]
 
-extern crate rustc_driver;
-extern crate rustc_interface;
-extern crate rustc_middle;
+fn main() {
+    color_eyre::install().unwrap();
 
-pub mod analysis;
-pub mod plugin;
-pub use plugin::CompilerPlugin;
-pub mod utils;
+    // env_logger::init();
+
+    let plugin = tool::CompilerPlugin::default();
+    rustc_plugin::driver_main(plugin);
+}
