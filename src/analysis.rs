@@ -9,7 +9,7 @@ use crate::plugin::PluginArgs;
 pub struct AnalysisConfig;
 
 impl AnalysisConfig {
-    pub(crate) fn from(plugin_args: PluginArgs) -> Self {
+    pub(crate) fn from(_plugin_args: PluginArgs) -> Self {
         Self
     }
 }
@@ -19,12 +19,12 @@ impl AnalysisConfig {
 pub struct AnalysisResult;
 
 // The main analysis function
-pub(crate) fn analyze(tcx: TyCtxt<'_>, conf: &AnalysisConfig) -> eyre::Result<AnalysisResult> {
+pub(crate) fn analyze(_tcx: TyCtxt<'_>, _conf: &AnalysisConfig) -> eyre::Result<AnalysisResult> {
     // TODO: Write your analysis here.
     todo!("implement analyze()")
 }
 
-pub(crate) fn process_result(analysis_result: &AnalysisResult) -> eyre::Result<()> {
+pub(crate) fn process_result(_analysis_result: &AnalysisResult) -> eyre::Result<()> {
     // TODO: Process the result here
     todo!("implement process_result()")
 }

@@ -25,10 +25,17 @@
 // #![deny(warnings)]
 #![feature(rustc_private)]
 
+use std::io;
+
+use tracing_subscriber::EnvFilter;
+
 fn main() {
     color_eyre::install().unwrap();
 
-    // env_logger::init();
+    tracing_subscriber::fmt()
+        .with_env_filter(EnvFilter::from_default_env())
+        .with_writer(io::stderr)
+        .init();
 
     let plugin = tool::CompilerPlugin::default();
     rustc_plugin::driver_main(plugin);
