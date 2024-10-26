@@ -5,6 +5,7 @@ edition = "2021"
 
 [dependencies]
 camino = { version = "1.1.9", features = ["serde1"] }
+cargo_metadata = "0.18.1"
 clap = { version = "4.5.20", features = ["derive"] }
 color-eyre = "0.6.3"
 rustc_plugin = "=0.10.0-nightly-2024-05-20"

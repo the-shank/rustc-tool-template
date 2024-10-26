@@ -25,6 +25,14 @@
 // #![deny(warnings)]
 #![feature(rustc_private)]
 
-fn main() {
+use color_eyre::eyre;
+use tool::utils;
+
+fn main() -> eyre::Result<()> {
+    let package_name = utils::get_crate_name()?;
+    utils::clean_crate_by_name(&package_name)?;
+
     rustc_plugin::cli_main(tool::CompilerPlugin);
+
+    Ok(())
 }
