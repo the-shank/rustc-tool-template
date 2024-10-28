@@ -118,7 +118,10 @@ impl rustc_driver::Callbacks for Callbacks {
             .enter(|tcx| analyze(tcx, &self.analysis_config));
 
         match res {
-            Ok(_) => Compilation::Continue,
+            Ok(analysis_result) => {
+                self.analysis_result = Some(analysis_result);
+                Compilation::Continue
+            }
             Err(e) => {
                 error!("failed during analysis [PLEASE INVESTIGATE]\n{e:?}");
                 Compilation::Stop
